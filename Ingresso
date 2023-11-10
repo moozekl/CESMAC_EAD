@@ -1,0 +1,24 @@
+package Cinema;
+
+public class Ingresso extends Filme {
+
+    private static int inteira = 24;
+    private static int meia = 12;
+    private static int qtdIngressos = 0;
+    private static double valorTotal = 0;
+    public static void setInteira(){
+        valorTotal = qtdIngressos * inteira;
+    }
+
+    public static void setMeia() {
+        valorTotal = qtdIngressos * meia;
+    }
+
+    public static void setQtdIngressos(int qtdIngressos){
+        Ingresso.qtdIngressos = qtdIngressos;
+    }
+
+    public static double getValorTotal(){
+        return valorTotal;
+    }
+}
