@@ -1,0 +1,128 @@
+package Cinema;
+
+import java.util.Scanner;
+
+public class MenuController {
+
+    static Scanner sc = new Scanner(System.in);
+
+    public static void menu() {
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=");
+        System.out.println("     CINEMAX-PLUS      ");
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=");
+
+        System.out.println("=================================");
+        System.out.println("\nESCOLHA UMA DAS OPÇÕES:");
+        System.out.println("Opção 01 - Exibir filmes");
+        System.out.println("Opção 02 - Compra de Ingressos");
+        System.out.println("Opção 03 - Sair ");
+        System.out.println("=================================");
+
+    }
+    public static void opcaoFilmes (){
+        Filme.getfilmes();
+        try {
+            Thread.sleep(4200);} catch (InterruptedException e) {throw new RuntimeException(e);}
+        System.out.println("\nEstaremos retornando para o menu inicial.\n");
+        try {
+            Thread.sleep(4000);} catch (InterruptedException e) {throw new RuntimeException(e);}
+    }
+
+    public static void compradeIngresso(){
+
+        System.out.print("\nInforme a quantidade de ingressos: ");
+        Ingresso.setQtdIngressos(sc.nextInt());
+        System.out.println();
+
+        System.out.println("==================Ingressos==================");
+        System.out.print(" \n[1] Inteira - R$ 24,00");
+        System.out.println("[2] Meia - R$ 12,00");
+
+        System.out.print("\nDigite o tipo de ingresso: ");
+        int tipodeingresso = sc.nextInt();
+
+        if (tipodeingresso == 1){
+            Ingresso.setInteira();
+        }
+        else {
+            Ingresso.setMeia();
+        }
+
+        Filme.getfilmes();
+        System.out.print("Qual o filme que você deseja assistir: ");
+        Filme.setFilmeEscolhido(sc.nextInt());
+
+        try {
+            Thread.sleep(4200);} catch (InterruptedException e) {throw new RuntimeException(e);}
+        System.out.println("\nCarregando sessões disponíveis...Aguarde");
+        try {
+            Thread.sleep(4000);} catch (InterruptedException e) {throw new RuntimeException(e);}
+
+        System.out.println("\nEstas são as sessões disponíveis:");
+        Filme.getsessoes();
+        System.out.print("Digite a sessão que deseja assistir: ");
+        Filme.setsetSessaoEscolhida(sc.nextInt());
+        System.out.println();
+
+    }
+
+    public static void comprovante() {
+        try {
+            Thread.sleep(4200);} catch (InterruptedException e) {throw new RuntimeException(e);}
+        System.out.println("Só um momento...\n");
+        try {
+            Thread.sleep(4000);} catch (InterruptedException e) {throw new RuntimeException(e);}
+        System.out.println("Aqui esta o resumo de sua compra: ");
+        System.out.print("Filme escolhido:");
+        Filme.resumoCompraFilme();
+        System.out.println("Sessão escolhida: " + Filme.getSessaoEscolhida());
+        System.out.println("Valor total R$ " + (Ingresso.getValorTotal()));
+
+    }
+
+    public static void inicio() {
+        System.out.println("\nDeseja iniciar a compra do Ingresso?\n");
+        System.out.print("[ 1 ] SIM");
+        System.out.println("  [ 2 ] NÃO");
+        System.out.print("Digite a opção: ");
+        int selectOP = sc.nextInt();
+
+        if (selectOP == 1){
+            try {
+                Thread.sleep(4200);} catch (InterruptedException e) {throw new RuntimeException(e);}
+            System.out.println("\nEntrando...");
+            try {
+                Thread.sleep(4000);} catch (InterruptedException e) {throw new RuntimeException(e);}
+            compradeIngresso();
+            comprovante();
+        }else {
+        System.out.println("Volte sempre!");}
+    }
+
+    public static void main(String[] args) {
+        int option = 0;
+        do {
+            menu();
+            System.out.print("Digite qual opção deseja: ");
+            option = sc.nextInt();
+            switch (option) {
+                case 1:
+                    opcaoFilmes();
+                    break;
+                case 2:
+                    inicio();
+                    option = 3;
+                    break;
+                case 3:
+                    System.out.println("Volte sempre!");
+                    break;
+                default:
+                    System.err.println("A opção escolhida inválida!");
+
+            }
+
+        } while (option != 3);
+
+    }
+
+}
